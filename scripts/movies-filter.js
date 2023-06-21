@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function displayResults(movies, container) {
     // Clear the results container before displaying the new results
-    container.innerHTML = "";
+    container.textContent = "";
 
     // Display the number of movies found.
     const counterMovies = document.createElement("p");
@@ -439,20 +439,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Display the founded movies in the container
     movies.forEach((movie) => {
-      const foundedMovies = document.createElement("div");
-      foundedMovies.classList.add("movie-item");
-      foundedMovies.innerHTML = `          
-          <strong class = "data">UserID:</strong> ${movie.id}<br>
-          <strong class = "data">Username:</strong> ${movie.username}<br>
-          <strong class = "data">Email:</strong> ${movie.email}<br>
-          <strong class = "data">Full Address:</strong> ${movie.fullAddress}<br>
-          <strong class = "data">Company:</strong> ${movie.company}<br>
-          <strong class = "data">Movie:</strong> ${movie.movie}<br>
-          <strong class = "data">Rate:</strong> ${movie.rate}<br>
-          <img src="${movie.image}" alt="${movie.movie}">
-          <hr>         
-        `;
-      container.appendChild(foundedMovies);
+      const movieItem = `
+      <div class="movie-item">
+        <strong class="data">UserID:</strong> ${movie.id}<br>
+        <strong class="data">Username:</strong> ${movie.username}<br>
+        <strong class="data">Email:</strong> ${movie.email}<br>
+        <strong class="data">Full Address:</strong> ${movie.fullAddress}<br>
+        <strong class="data">Company:</strong> ${movie.company}<br>
+        <strong class="data">Movie:</strong> ${movie.movie}<br>
+        <strong class="data">Rate:</strong> ${movie.rate}<br>
+        <img src="${movie.image}" alt="${movie.movie}">
+        <hr>
+      </div>
+    `;
+
+    container.insertAdjacentHTML("beforeend", movieItem);
     });
   }
 });
