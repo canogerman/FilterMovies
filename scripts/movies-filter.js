@@ -429,7 +429,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function displayResults(movies, container) {
     // Clear the results container before displaying the new results
-    container.innerHTML = "";
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
 
     // Display the number of movies found.
     const counterMovies = document.createElement("p");
@@ -441,17 +443,61 @@ document.addEventListener("DOMContentLoaded", function () {
     movies.forEach((movie) => {
       const foundedMovies = document.createElement("div");
       foundedMovies.classList.add("movie-item");
-      foundedMovies.innerHTML = `          
-          <strong class = "data">UserID:</strong> ${movie.id}<br>
-          <strong class = "data">Username:</strong> ${movie.username}<br>
-          <strong class = "data">Email:</strong> ${movie.email}<br>
-          <strong class = "data">Full Address:</strong> ${movie.fullAddress}<br>
-          <strong class = "data">Company:</strong> ${movie.company}<br>
-          <strong class = "data">Movie:</strong> ${movie.movie}<br>
-          <strong class = "data">Rate:</strong> ${movie.rate}<br>
-          <img src="${movie.image}" alt="${movie.movie}">
-          <hr>         
-        `;
+  
+      const userId = document.createElement("strong");
+      userId.textContent = "UserID:";
+      const userIdValue = document.createTextNode(movie.id);
+      foundedMovies.appendChild(userId);
+      foundedMovies.appendChild(userIdValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const username = document.createElement("strong");
+      username.textContent = "Username:";
+      const usernameValue = document.createTextNode(movie.username);
+      foundedMovies.appendChild(username);
+      foundedMovies.appendChild(usernameValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const email = document.createElement("strong");
+      email.textContent = "Email:";
+      const emailValue = document.createTextNode(movie.email);
+      foundedMovies.appendChild(email);
+      foundedMovies.appendChild(emailValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const fullAddress = document.createElement("strong");
+      fullAddress.textContent = "Full Address:";
+      const fullAddressValue = document.createTextNode(movie.fullAddress);
+      foundedMovies.appendChild(fullAddress);
+      foundedMovies.appendChild(fullAddressValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const company = document.createElement("strong");
+      company.textContent = "Company:";
+      const companyValue = document.createTextNode(movie.company);
+      foundedMovies.appendChild(company);
+      foundedMovies.appendChild(companyValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const movieTitle = document.createElement("strong");
+      movieTitle.textContent = "Movie:";
+      const movieTitleValue = document.createTextNode(movie.movie);
+      foundedMovies.appendChild(movieTitle);
+      foundedMovies.appendChild(movieTitleValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const rate = document.createElement("strong");
+      rate.textContent = "Rate:";
+      const rateValue = document.createTextNode(movie.rate);
+      foundedMovies.appendChild(rate);
+      foundedMovies.appendChild(rateValue);
+      foundedMovies.appendChild(document.createElement("br"));
+  
+      const image = document.createElement("img");
+      image.src = movie.image;
+      image.alt = movie.movie;
+      foundedMovies.appendChild(image);
+      foundedMovies.appendChild(document.createElement("hr"));
       container.appendChild(foundedMovies);
     });
   }
